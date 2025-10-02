@@ -1,5 +1,6 @@
 package com.example.practica_2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -40,10 +41,19 @@ class MainActivity : AppCompatActivity() {
         checkBox = findViewById(R.id.checkBox)
         buttonMostrarTexto.setOnClickListener() {
                 mostrarTexto()
+                lanzarNuevaActivity();
         }
     }
 
     private fun mostrarTexto(){
         textView.setText("Nombre : ${textNombre.text}\nEmail : ${textEmail.text}\nEstado del chekBox : ${checkBox.isChecked}")
+    }
+
+    private fun lanzarNuevaActivity(){
+        val intent = Intent(applicationContext, DetallesActivity::class.java)
+        intent.putExtra("nombre", textNombre.text.toString())
+        intent.putExtra("email", textEmail.text.toString())
+        intent.putExtra("promociones", checkBox.isChecked)
+        startActivity(intent)
     }
 }
